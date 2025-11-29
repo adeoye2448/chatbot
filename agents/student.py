@@ -8,7 +8,7 @@ language = ChatGroq(model = "openai/gpt-oss-20b", api_key = os.getenv("GROQ_API_
 
 def student_llm(state):
     prompt = ChatPromptTemplate.from_messages([
-        ("system", "You are a customer care bot. Classify the issue as Billing, Technical or Feedback."),
+        ("system", "You are a student assistant bot. Classify the issue as department, courses or classes."),
         ("user", "issue: {issue}")
     ])
 

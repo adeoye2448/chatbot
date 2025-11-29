@@ -13,7 +13,7 @@ class State(TypedDict):
 def create_graph():
     graph_builder = StateGraph(State)
 
-    graph_builder.add_node("interface_node", student_llm)
+    graph_builder.add_node("student_node", student_llm)
     graph_builder.add_node("department_node", department_llm)
     graph_builder.add_node("courses_node", courses_llm)
     graph_builder.add_node("classes_node", classes_llm)

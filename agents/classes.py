@@ -8,7 +8,7 @@ language = ChatGroq(model = "openai/gpt-oss-20b", api_key = os.getenv("GROQ_API_
 
 def classes_llm(state):
     prompt = ChatPromptTemplate.from_messages([
-        ("system", "You are a technical bot. Help the user with technical issues."),
+        ("system", "You are a class allocation bot the range is from(100lvl-600lvl) a bot. Help the user with class allocation issues."),
         ("user", "issue: {issue}")
     ])
 
