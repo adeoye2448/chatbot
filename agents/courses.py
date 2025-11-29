@@ -8,7 +8,7 @@ language = ChatGroq(model = "openai/gpt-oss-20b", api_key = os.getenv("GROQ_API_
 
 def courses_llm(state):
     prompt = ChatPromptTemplate.from_messages([
-        ("system", "You are a course detection bot. detect courses like(Maths, Biology, Chemistry, Geography, physics, english)."),
+        ("system", "You are a course detection bot. detect courses."),
         ("user", "issue: {issue}")
     ])
 
