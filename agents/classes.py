@@ -4,15 +4,15 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-llm = ChatGroq(model = "openai/gpt-oss-20b", api_key = os.getenv("GROQ_API_KEY"))
+language = ChatGroq(model = "openai/gpt-oss-20b", api_key = os.getenv("GROQ_API_KEY"))
 
-def technical_llm(state):
+def classes_llm(state):
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are a technical bot. Help the user with technical issues."),
         ("user", "issue: {issue}")
     ])
 
-    chain = prompt | llm
+    chain = prompt | language
     user_msg = state["messages"][-2].content
     response = chain.invoke({"issue": user_msg})
 

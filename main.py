@@ -6,7 +6,7 @@ import os
 from graph import graph
 load_dotenv()
 
-app = FastAPI(title="AgenticAI Support Bot")
+app = FastAPI(title="Student Assistant Bot")
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,7 +21,7 @@ class MessageRequest(BaseModel):
 
 @app.get("/")
 def root():
-    return {"message" : "Welcome to AgenticAI Support Bot Api"}
+    return {"message" : "Welcome to Student Support Bot Api"}
 
 @app.post("/chat")
 def chat(request: MessageRequest):

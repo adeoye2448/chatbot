@@ -2,10 +2,10 @@ from typing import TypedDict
 from typing_extensions import Annotated
 from langgraph.graph.message import add_messages
 from langgraph.graph import StateGraph, START, END
-from agents.interface import interface_llm, router_decision
-from agents.billling import billing_llm
-from agents.technical import technical_llm
-from agents.feedback import feedback_llm
+from agents.student import student_llm, router_decision
+from agents.department import department_llm
+from agents.courses import courses_llm
+from agents.classes import classes_llm
 
 class State(TypedDict):
     messages : Annotated[list, add_messages]
@@ -13,26 +13,26 @@ class State(TypedDict):
 def create_graph():
     graph_builder = StateGraph(State)
 
-    graph_builder.add_node("interface_node", interface_llm)
-    graph_builder.add_node("billing_node", billing_llm)
-    graph_builder.add_node("technical_node", technical_llm)
-    graph_builder.add_node("feedback_node", feedback_llm)
+    graph_builder.add_node("interface_node", student_llm)
+    graph_builder.add_node("department_node", department_llm)
+    graph_builder.add_node("courses_node", courses_llm)
+    graph_builder.add_node("classes_node", classes_llm)
 
-    graph_builder.add_edge(START, "interface_node")
+    graph_builder.add_edge(START, "student_node")
 
     graph_builder.add_conditional_edges(
-        "interface_node",
+        "student_node",
         router_decision,
         {
-            "billing_node": "billing_node",
-            "technical_node": "technical_node",
-            "feedback_node": "feedback_node",
+            "department_node": "department_node",
+            "courses_node": "courses_node",
+            "classes_node": "classes_node",
         }
     )
 
-    graph_builder.add_edge("billing_node", END)
-    graph_builder.add_edge("technical_node", END)
-    graph_builder.add_edge("feedback_node", END)
+    graph_builder.add_edge("department_node", END)
+    graph_builder.add_edge("courses_node", END)
+    graph_builder.add_edge("classes_node", END)
 
     return graph_builder.compile()
 
